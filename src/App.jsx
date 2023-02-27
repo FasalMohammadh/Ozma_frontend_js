@@ -28,7 +28,7 @@ const App = () => {
     email: '',
   });
 
-  const store = useRef({ nic: '', imageUrl: '' }).current;
+  const store = useRef({ nic: '', imageUrl: '', userId: '' }).current;
 
   const FormStep = lookUpFormStep[formStep];
 

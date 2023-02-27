@@ -50,7 +50,9 @@ function AccountDetails() {
 
       const { signatureFile, photo, indexNo, profession, ...userData } = data;
 
-      await userApi.create({
+      const {
+        data: { userId },
+      } = await userApi.create({
         ...userData,
         indexNo: data.indexNo ?? null,
         profession: data.profession ?? null,
@@ -62,6 +64,7 @@ function AccountDetails() {
 
       store.imageUrl = photoUrl;
       store.nic = userData.nic;
+      store.userId = userId;
       toast.success('Successful');
       setFormStep(FormTypes.MEMBERSHIP_CARD);
     } catch (error) {

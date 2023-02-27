@@ -43,7 +43,9 @@ function MembershipCard() {
                   {store.nic}
                 </p>
                 <p className='font-poppins text-xs'>ID:</p>
-                <p className='font-poppins text-xs font-semibold'>00124</p>
+                <p className='font-poppins text-xs font-semibold'>
+                  {store.userId}
+                </p>
               </div>
             </div>
             <div className='aspect-square w-16 md:w-32 overflow-hidden rounded-xl bg-white'>
