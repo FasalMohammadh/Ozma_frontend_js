@@ -93,7 +93,7 @@ function AccountDetails() {
         <h1 className='font-poppins text-2xl font-medium uppercase'>
           Account Details
         </h1>
-        <div className='my-8 grid grid-cols-1 gap-y-6 text-left sm:grid-cols-[repeat(2,250px)] sm:gap-x-12 sm:gap-y-8 md:gap-x-20 lg:gap-x-28'>
+        <div className='my-8 grid grid-cols-[auto] gap-y-6 text-left sm:grid-cols-[repeat(2,250px)] sm:gap-x-12 sm:gap-y-8 md:gap-x-20 lg:gap-x-28'>
           <div>
             <TextInput placeholder='Full Name' {...register('fullName')} />
             <span className='pl-3 text-sm text-red-500'>
@@ -158,7 +158,7 @@ function AccountDetails() {
             </span>
           </div>
 
-          <div className='col-span-2'>
+          <div className='sm:col-span-2'>
             <TextInput
               placeholder='Are you employed? if yes, Please mention your profession.'
               {...register('profession')}
@@ -168,7 +168,7 @@ function AccountDetails() {
             </span>
           </div>
 
-          <div className='col-span-2'>
+          <div className='sm:col-span-2'>
             <div className='flex justify-between border-b-2 border-custom-input '>
               <label className='pl-3 font-poppins text-sm text-custom-input-placeholder'>
                 Were you part of the School Media Forum?
@@ -190,7 +190,7 @@ function AccountDetails() {
             </span>
           </div>
 
-          <div className='col-span-2'>
+          <div className='sm:col-span-2'>
             <div className='flex items-end justify-between border-b-2 border-custom-input'>
               <label
                 id='contribution'
