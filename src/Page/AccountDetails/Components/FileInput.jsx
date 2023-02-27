@@ -14,9 +14,9 @@ const FileInput = React.forwardRef(({ placeholder, ...props }, ref) => {
           accept='.png,.jpeg,.jpg'
           {...props}
           onChange={event => {
-            if (event.target.files?.length) {
+            if (event.target.files?.length)
               setImage(URL.createObjectURL(event.target.files[0]));
-            }
+            else setImage(null);
             props.onChange?.(event);
           }}
         />

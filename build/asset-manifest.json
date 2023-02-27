@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.c4c6c1ee.css",
-    "main.js": "/static/js/main.1ba2f27e.js",
+    "main.css": "/static/css/main.9a89b0a8.css",
+    "main.js": "/static/js/main.536d72b0.js",
     "static/js/787.1b3e9341.chunk.js": "/static/js/787.1b3e9341.chunk.js",
     "static/media/Background.svg": "/static/media/Background.837eb03c5b420e4b00a2d0b20ecbe147.svg",
     "static/media/SchoolLogo.png": "/static/media/SchoolLogo.a021892679c8bbf68449.png",
     "static/media/CardBackground.png": "/static/media/CardBackground.5e2154a2e65f1d11bf8e.png",
     "static/media/Logo.png": "/static/media/Logo.70e001f4d7d4b9691df0.png",
+    "static/media/Info.png": "/static/media/Info.da6529ad73480ad14a62.png",
     "static/media/FB.png": "/static/media/FB.1a84617ba42cf140b81f.png",
     "static/media/Instagram.png": "/static/media/Instagram.fa104452688f31e0bbe3.png",
     "static/media/QRCode.png": "/static/media/QRCode.40645e85229af99c3825.png",
@@ -14,12 +15,12 @@
     "static/media/User.svg": "/static/media/User.b549e9adee94e5e60e24641b4a128521.svg",
     "index.html": "/index.html",
     "static/media/ArrowRight.svg": "/static/media/ArrowRight.c3e0150f63299f6344352d71743a514d.svg",
-    "main.c4c6c1ee.css.map": "/static/css/main.c4c6c1ee.css.map",
-    "main.1ba2f27e.js.map": "/static/js/main.1ba2f27e.js.map",
+    "main.9a89b0a8.css.map": "/static/css/main.9a89b0a8.css.map",
+    "main.536d72b0.js.map": "/static/js/main.536d72b0.js.map",
     "787.1b3e9341.chunk.js.map": "/static/js/787.1b3e9341.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c4c6c1ee.css",
-    "static/js/main.1ba2f27e.js"
+    "static/css/main.9a89b0a8.css",
+    "static/js/main.536d72b0.js"
   ]
 }

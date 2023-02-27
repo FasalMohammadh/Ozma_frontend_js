@@ -82,6 +82,19 @@ const PersonalDetails = () => {
           />
           <span className='ml-2 text-sm text-red-500 '>{errors.firstName}</span>
         </div>
+
+        <div>
+          <input
+            type='text'
+            placeholder='Last Name'
+            autoComplete='family-name'
+            className='w-full rounded-md bg-custom-input-bg p-2 font-poppins placeholder:font-poppins placeholder:text-sm placeholder:text-custom-input-placeholder'
+            name='lastName'
+            onChange={handleChange}
+          />
+          <span className='ml-2 text-sm text-red-500 '>{errors.lastName}</span>
+        </div>
+
         <div>
           <input
             type='text'
@@ -95,17 +108,7 @@ const PersonalDetails = () => {
             {errors.phoneNumber}
           </span>
         </div>
-        <div>
-          <input
-            type='text'
-            placeholder='Last Name'
-            autoComplete='family-name'
-            className='w-full rounded-md bg-custom-input-bg p-2 font-poppins placeholder:font-poppins placeholder:text-sm placeholder:text-custom-input-placeholder'
-            name='lastName'
-            onChange={handleChange}
-          />
-          <span className='ml-2 text-sm text-red-500 '>{errors.lastName}</span>
-        </div>
+
         <div>
           <input
             type='text'
@@ -135,7 +138,7 @@ const PersonalDetails = () => {
         type='submit'
         className='rounded-md bg-custom-accent-color-3 px-12 py-2 font-poppins font-semibold text-white disabled:bg-opacity-50'
       >
-        Verify Details
+        Next
       </Button>
     </form>
   );

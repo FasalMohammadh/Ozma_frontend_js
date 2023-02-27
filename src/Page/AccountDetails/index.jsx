@@ -9,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import { z } from 'zod';
 
+import InfoIcon from './../../Assets/Icons/Info.png';
+
 import Button from './../../Components/Button';
 
 import FormContext, { FormTypes } from './../../Context/FormContext';
@@ -91,7 +93,7 @@ function AccountDetails() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='sm-my-0 mx-4 my-12 w-full rounded-3xl bg-white p-6 text-center sm:mx-0 sm:w-[unset] sm:pt-5 sm:pb-12 md:p-16 md:pt-5 md:pb-12 lg:p-28 lg:pb-20 lg:pt-7'
+        className='max-h-[500px] sm:max-h-none overflow-auto sm-my-0 mx-4 my-12 w-full rounded-3xl bg-white p-6 text-center sm:mx-0 sm:w-[unset] sm:pt-5 sm:pb-12 md:p-16 md:pt-5 md:pb-12 lg:p-28 lg:pb-20 lg:pt-7'
       >
         <h1 className='font-poppins text-2xl font-medium uppercase'>
           Account Details
@@ -228,6 +230,15 @@ function AccountDetails() {
               placeholder='Signature File Upload'
               {...register('signatureFile')}
             />
+
+            <div className='gap-2 flex items-center mt-4 text-center'>
+              <img src={InfoIcon} alt='Information Icon' width={30} />
+              <p className='text-xs text-slate-500'>
+                Please use white paper and sign your signature clearly and
+                upload.
+              </p>
+            </div>
+
             <span className='pl-3 text-sm text-red-500'>
               {errors.signatureFile?.message}
             </span>
