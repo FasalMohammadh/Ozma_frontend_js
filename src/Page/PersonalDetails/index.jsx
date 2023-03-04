@@ -60,18 +60,20 @@ const PersonalDetails = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='my-16 flex w-10/12 flex-col items-center rounded-3xl bg-white px-6 pb-6 sm:w-[unset] sm:px-12 sm:pb-16 md:px-20 lg:px-28'
+      className='container mx-5 my-16 flex max-w-3xl flex-col items-center rounded-3xl bg-white px-6 pb-6 sm:px-12 sm:pb-16 md:px-20 lg:px-28'
     >
       <img
         src={UserIcon}
+        width={91}
+        height={91}
         alt='User Icon'
         className='-translate-y-1/2 rounded-full bg-white p-2'
       />
       <h1 className='-mt-8 mb-10 font-poppins text-2xl font-medium text-custom-form-text'>
         Personal Details
       </h1>
-      <div className='mb-12 grid gap-y-5 sm:mb-32 sm:grid-cols-[repeat(2,200px)] sm:gap-x-16 lg:grid-cols-[repeat(2,300px)]'>
-        <div>
+      <div className='mb-12 grid w-full gap-y-5 sm:mb-32 sm:grid-cols-2 sm:gap-x-16'>
+        <div className='w-full'>
           <input
             type='text'
             placeholder='First Name*'
@@ -83,7 +85,7 @@ const PersonalDetails = () => {
           <span className='ml-2 text-sm text-red-500 '>{errors.firstName}</span>
         </div>
 
-        <div>
+        <div className='w-full'>
           <input
             type='text'
             placeholder='Last Name'
@@ -95,7 +97,7 @@ const PersonalDetails = () => {
           <span className='ml-2 text-sm text-red-500 '>{errors.lastName}</span>
         </div>
 
-        <div>
+        <div className='w-full'>
           <input
             type='text'
             placeholder='Phone Number'
@@ -109,7 +111,7 @@ const PersonalDetails = () => {
           </span>
         </div>
 
-        <div>
+        <div className='w-full'>
           <input
             type='text'
             placeholder='WhatsApp Number*'
@@ -122,7 +124,7 @@ const PersonalDetails = () => {
             {errors.whatsAppNumber}
           </span>
         </div>
-        <div>
+        <div className='w-full'>
           <input
             type='text'
             placeholder='Email*'
@@ -140,6 +142,10 @@ const PersonalDetails = () => {
       >
         Next
       </Button>
+
+      <p className='text-poppins mt-4 text-center text-sm text-custom-form-text'>
+        *If you have any technical issues please contact +9475 814 1434.
+      </p>
     </form>
   );
 };

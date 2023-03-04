@@ -16,8 +16,9 @@ const Welcome = () => {
     <div className='flex flex-col items-center justify-center gap-4 text-center font-mont'>
       <h1 className='text-4xl font-semibold'>OZMA Digital Registration</h1>
       <span>
-        Welcome to new Era of OZMA.
-        <br /> Lets be part Digital Weo
+        Welcome to the new Era of OZMA.
+        <br />
+        Let’s be part of the member of the Digital Weo
       </span>
       <Button
         aria-label='Get Start'
@@ -26,6 +27,9 @@ const Welcome = () => {
       >
         <img src={ArrowRight} alt='Arrow Right Icon' />
       </Button>
+      <p className='text-poppins mt-4 text-sm text-center'>
+        *If you have any technical issues please contact +9475 814 1434.
+      </p>
     </div>
   );
 };

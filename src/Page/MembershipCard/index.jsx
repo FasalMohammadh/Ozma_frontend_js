@@ -19,23 +19,24 @@ function MembershipCard() {
     .padStart(2, '0')}.${date.getDay().toString().padStart(2, '0')}`;
 
   return (
-    <div className='pb-24'>
-      <div className='mt-10 md:mt-20 self-start'>
-        <h1 className='p-2 sm:p-0 text-center font-mont text-3xl font-semibold text-white'>
-          Thanks for registration!
-          <br />
-          Your ID will be received to you soon!
-        </h1>
-        <div className='relative left-5 md:left-10 isolate mx-auto mt-12 w-fit text-[#2e2f30]'>
-          <div className="transform-none w-[250px] h-[200px] md:h-[250px] md:w-[400px] rounded-2xl bg-[url('/src/Assets/Images/CardBackground.png')] bg-cover xs:[transform:rotate3d(1,_3,_-2,_25deg)_skewX(15deg)] [box-shadow:-75px_30px_10px_0_rgb(0_0_0/.15)] before:absolute before:right-0 before:block before:h-full before:w-full before:rounded-xl before:bg-gradient-to-r before:from-transparent before:to-slate-300/10">
+    <div className='mt-10'>
+      <h1 className='p-2 text-center font-mont text-3xl font-semibold text-white sm:p-0'>
+        Thanks for registration!
+        <br />
+        Your ID will be sent to you after the payment confirmation!
+      </h1>
+
+      <div className='mt-12 pt-4 pb-16 md:pt-8 md:pb-32'>
+        <div className='relative left-5 isolate mx-auto w-fit text-[#2e2f30] md:left-10'>
+          <div className="h-[200px] w-[250px] transform-none rounded-2xl bg-[url('/src/Assets/Images/CardBackground.png')] bg-cover [box-shadow:-75px_30px_10px_0_rgb(0_0_0/.15)] before:absolute before:right-0 before:block before:h-full before:w-full before:rounded-xl before:bg-gradient-to-r before:from-transparent before:to-slate-300/10 xs:[transform:rotate3d(1,_3,_-2,_25deg)_skewX(15deg)] md:h-[250px] md:w-[400px]">
             <div className='flex items-start justify-between py-3 px-4'>
               <img src={Logo} alt='Logo' width={60} />
               <img src={SchoolLogo} alt='School Logo' width={30} />
             </div>
-            <div className='flex justify-between gap-2 md:gap-10 px-2 py-2 md:px-4 md:py-4'>
+            <div className='flex justify-between gap-2 px-2 py-2 md:gap-10 md:px-4 md:py-4'>
               <div className='flex flex-col gap-1 md:gap-2'>
                 <h1 className='font-poppins text-xs'>Membership Card</h1>
-                <p className='font-poppins text-lg md:text-xl font-bold'>
+                <p className='font-poppins text-lg font-bold md:text-xl'>
                   {personalDetails.firstName} {personalDetails.lastName}
                 </p>
                 <div className='grid grid-cols-[auto_1fr] gap-x-2 gap-y-1'>
@@ -50,7 +51,7 @@ function MembershipCard() {
                   </p>
                 </div>
               </div>
-              <div className='aspect-square w-16 md:w-32 overflow-hidden rounded-xl bg-white'>
+              <div className='aspect-square w-16 overflow-hidden rounded-xl bg-white md:w-32'>
                 <img
                   src={store.imageUrl}
                   alt='Profile'
@@ -58,7 +59,7 @@ function MembershipCard() {
                 />
               </div>
             </div>
-            <div className='flex gap-1 md:gap-2 px-2 md:px-4 py-1 font-poppins text-sm'>
+            <div className='flex gap-1 px-2 py-1 font-poppins text-sm md:gap-2 md:px-4'>
               <p>Date of Issue:</p>
               <p className='font-semibold'>{formattedDate}</p>
             </div>
@@ -93,7 +94,7 @@ function MembershipCard() {
               </div>
             </div>
           </div> */}
-          <div className="absolute top-12 md:top-24 -left-10 md:-left-20 z-[-1] h-full w-full rounded-2xl bg-[url('/src/Assets/Images/CardBackground.png')] bg-cover xs:[transform:rotate3d(1,_3,_-2,_25deg)_skewX(15deg)]">
+          <div className="absolute top-12 -left-10 z-[-1] h-full w-full rounded-2xl bg-[url('/src/Assets/Images/CardBackground.png')] bg-cover xs:[transform:rotate3d(1,_3,_-2,_25deg)_skewX(15deg)] md:top-24 md:-left-20">
             <div className='grid h-full grid-cols-5 p-6'>
               <div className=' col-span-3 grid h-full grid-rows-2 items-end'>
                 <p className='mt-2 font-poppins text-xs font-medium text-gray-500/80'>
@@ -134,6 +135,13 @@ function MembershipCard() {
           </div>
         </div>
       </div>
+      <p className='text-poppins mt-8 px-2 text-center text-lg text-white'>
+        Note: Thanks for Applying, You need do payment to get the ID card, Our
+        Team will contact you soon!.
+      </p>
+      <p className='text-poppins mt-2 px-2 text-center text-sm text-white'>
+        *If you have any technical issues please contact +9475 814 1434.
+      </p>
     </div>
   );
 }

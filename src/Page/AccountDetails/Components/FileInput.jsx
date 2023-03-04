@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const FileInput = React.forwardRef(({ placeholder, ...props }, ref) => {
-  const [image, setImage] = useState(null);
+const FileInput = React.forwardRef(({ placeholder, image, ...props }, ref) => {
+  const previewImage = image?.item?.(0)
+    ? URL.createObjectURL(image?.item?.(0))
+    : null;
+  const [preview, setPreview] = useState(previewImage);
+
+  useEffect(() => {
+    setPreview(image?.item?.(0) ? URL.createObjectURL(image?.item?.(0)) : null);
+  }, [image]);
 
   return (
     <>
@@ -13,17 +20,11 @@ const FileInput = React.forwardRef(({ placeholder, ...props }, ref) => {
           className={'hidden'}
           accept='.png,.jpeg,.jpg'
           {...props}
-          onChange={event => {
-            if (event.target.files?.length)
-              setImage(URL.createObjectURL(event.target.files[0]));
-            else setImage(null);
-            props.onChange?.(event);
-          }}
         />
       </label>
-      {image && (
+      {preview && (
         <img
-          src={image}
+          src={preview}
           alt='Preview'
           className=' mt-5 aspect-square max-w-[150px] rounded-sm object-cover ring-1 ring-custom-input'
         />

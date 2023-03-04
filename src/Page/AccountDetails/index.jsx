@@ -36,6 +36,7 @@ function AccountDetails() {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -60,8 +61,12 @@ function AccountDetails() {
         profession: data.profession ?? null,
         signatureFileUrl,
         photoUrl,
+        alYear: data.alYear || null,
+        firstName: personalDetails.firstName,
+        lastName: personalDetails.lastName,
         email: personalDetails.email,
-        mobileNumber: personalDetails.phoneNumber,
+        mobileNumber: personalDetails.phoneNumber || null,
+        whatsappNumber: personalDetails.whatsAppNumber,
       });
 
       store.imageUrl = photoUrl;
@@ -70,7 +75,6 @@ function AccountDetails() {
       toast.success('Successful');
       setFormStep(FormTypes.MEMBERSHIP_CARD);
     } catch (error) {
-      console.log(error);
       if (error instanceof AxiosError) {
         switch (error.response?.status) {
           case 400: {
@@ -93,31 +97,17 @@ function AccountDetails() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='max-h-[500px] sm:max-h-none overflow-auto sm-my-0 mx-4 my-12 w-full rounded-3xl bg-white p-6 text-center sm:mx-0 sm:w-[unset] sm:pt-5 sm:pb-12 md:p-16 md:pt-5 md:pb-12 lg:p-28 lg:pb-20 lg:pt-7'
+        className='mx-4 my-12 max-h-[500px] w-full overflow-auto rounded-3xl bg-white p-6 text-center sm:mx-0 sm:max-h-none sm:w-[unset] sm:pt-5 sm:pb-12 md:p-16 md:pt-5 md:pb-12 lg:p-28 lg:pb-20 lg:pt-7'
       >
         <h1 className='font-poppins text-2xl font-medium uppercase'>
           Account Details
         </h1>
         <div className='my-8 grid grid-cols-[auto] gap-y-6 text-left sm:grid-cols-[repeat(2,250px)] sm:gap-x-12 sm:gap-y-8 md:gap-x-20 lg:gap-x-28'>
           <div>
-            <TextInput placeholder='Full Name' {...register('fullName')} />
-            <span className='pl-3 text-sm text-red-500'>
-              {errors.fullName?.message}
-            </span>
-          </div>
-
-          <div>
             <TextInput
-              placeholder='Date of Birth'
-              max={new Date().toISOString().split('T').at(0)}
+              autoComplete='bday'
+              placeholder='Date of Birth (dd/mm/yyyy)'
               {...register('dob')}
-              onBlur={event => {
-                event.target.setAttribute('type', 'text');
-                register('dob').onBlur(event);
-              }}
-              onFocus={event => {
-                event.target.setAttribute('type', 'date');
-              }}
             />
             <span className='pl-3 text-sm text-red-500'>
               {errors.dob?.message}
@@ -143,6 +133,17 @@ function AccountDetails() {
             />
             <span className='pl-3 text-sm text-red-500'>
               {errors.olYear?.message}
+            </span>
+          </div>
+
+          <div>
+            <TextInput
+              placeholder='GCE AL Year'
+              inputMode='numeric'
+              {...register('alYear')}
+            />
+            <span className='pl-3 text-sm text-red-500'>
+              {errors.alYear?.message}
             </span>
           </div>
 
@@ -227,25 +228,27 @@ function AccountDetails() {
 
           <div>
             <FileInput
+              image={watch('signatureFile')}
               placeholder='Signature File Upload'
               {...register('signatureFile')}
             />
 
-            <div className='gap-2 flex items-center mt-4 text-center'>
+            <span className='pl-3 text-sm text-red-500'>
+              {errors.signatureFile?.message}
+            </span>
+
+            <div className='mt-2 flex items-center gap-2 text-center'>
               <img src={InfoIcon} alt='Information Icon' width={30} />
               <p className='text-xs text-slate-500'>
                 Please use white paper and sign your signature clearly and
                 upload.
               </p>
             </div>
-
-            <span className='pl-3 text-sm text-red-500'>
-              {errors.signatureFile?.message}
-            </span>
           </div>
 
           <div>
             <FileInput
+              image={watch('photo')}
               placeholder='Passport Size Photo'
               {...register('photo')}
             />
@@ -261,6 +264,10 @@ function AccountDetails() {
         >
           Next
         </Button>
+
+        <p className='text-poppins mt-4 text-center text-sm text-custom-form-text'>
+          *If you have any technical issues please contact +9475 814 1434.
+        </p>
       </form>
       <ToastContainer
         position='bottom-right'
@@ -307,10 +314,15 @@ function validateYear(value, ctx) {
 }
 
 function validateDob(value, ctx) {
-  const valueAsDate = new Date(value);
-  const isValid = z.date().max(new Date()).safeParse(valueAsDate).success;
+  if (/^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+    const [day, month, year] = value.split(`/`);
+    const valueAsDate = new Date(year, month - 1, day);
+    const isValid = z.date().max(new Date()).safeParse(valueAsDate).success;
 
-  if (isValid) return valueAsDate.toISOString().split('T')[0];
+    console.log({ day, month, isValid, valueAsDate });
+    if (day <= 31 && month <= 12 && isValid)
+      return valueAsDate.toISOString().split('T')[0];
+  }
 
   ctx.addIssue({
     code: z.ZodIssueCode.custom,
@@ -334,28 +346,69 @@ function validatePartOfSmf(val, ctx) {
   }
 }
 
-function validateFile(fieldName) {
-  return [value => value.length !== 0, { message: `${fieldName} is required` }];
-}
+const validateFile = fieldName => (value, ctx) => {
+  const image = value.item(0);
+
+  if (image === null) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: `${fieldName} is Required`,
+    });
+    return z.NEVER;
+  }
+
+  const megaByteInBytes = 1024 * 1024;
+  if (image.size > 2 * megaByteInBytes) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'Maximum file size is 2Mb',
+    });
+    return z.NEVER;
+  }
+
+  return value;
+};
 
 const validationSchema = z.object({
-  fullName: z.string().trim().min(1, 'Full Name is a required field').trim(),
   address: z.string().trim().min(1, 'Address is a required field'),
   olYear: z
     .string()
+    .trim()
     .min(1, 'GCE OL Year is a required field')
     .transform(validateYear),
-  nic: z.string().min(1, 'NIC is a required field'),
+  alYear: z
+    .string()
+    .trim()
+    .transform((value, ctx) => {
+      if (!value) return value;
+
+      const valueAsNumber = Number(value);
+
+      if (
+        isNaN(valueAsNumber) ||
+        valueAsNumber > new Date().getFullYear() ||
+        valueAsNumber < 1000
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Not a valid year',
+        });
+        return z.NEVER;
+      }
+
+      return valueAsNumber;
+    }),
+  nic: z.string().trim().min(1, 'NIC is a required field'),
   signatureFile: z
     .instanceof(FileList)
-    .refine(...validateFile('Signature file')),
-  photo: z.instanceof(FileList).refine(...validateFile('Photo')),
+    .transform(validateFile('Signature file')),
+  photo: z.instanceof(FileList).transform(validateFile('Photo')),
   dob: z
     .string()
     .min(1, 'Date of Birth is a required field')
     .transform(validateDob),
-  profession: z.string().optional(),
-  indexNo: z.string().optional(),
+  profession: z.string().trim().optional(),
+  indexNo: z.string().trim().optional(),
   partOfSmf: z
     .union([z.literal('Yes'), z.literal('No')])
     .nullable()
