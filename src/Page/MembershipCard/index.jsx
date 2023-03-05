@@ -136,8 +136,7 @@ function MembershipCard() {
         </div>
       </div>
       <p className='text-poppins mt-8 px-2 text-center text-lg text-white'>
-        Note: Thanks for Applying, You need do payment to get the ID card, Our
-        Team will contact you soon!.
+        Note:Our Team will contact you soon!.
       </p>
       <p className='text-poppins mt-2 px-2 text-center text-sm text-white'>
         *If you have any technical issues please contact +9475 814 1434.
