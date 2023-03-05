@@ -18,7 +18,7 @@ const Welcome = () => {
       <span>
         Welcome to the new Era of OZMA.
         <br />
-        Let’s be part of the member of the Digital Weo
+        Let’s be part of the member of the Digital OZMA!
       </span>
       <Button
         aria-label='Get Start'
