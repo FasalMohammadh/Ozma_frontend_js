@@ -138,8 +138,9 @@ function MembershipCard() {
       <p className='text-poppins mt-8 px-2 text-center text-lg text-white'>
         Note:Our Team will contact you soon!.
       </p>
-      <p className='text-poppins mt-2 px-2 text-center text-sm text-white'>
-        *If you have any technical issues please contact +9475 814 1434.
+
+      <p className='text-poppins mt-2 px-2 text-center text-sm te*If you hxt-white'>
+        *All the information provided will be kept private and confidential.
       </p>
     </div>
   );
