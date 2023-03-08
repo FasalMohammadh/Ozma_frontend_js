@@ -144,7 +144,8 @@ const PersonalDetails = () => {
       </Button>
 
       <p className='text-poppins mt-4 text-center text-sm text-custom-form-text'>
-        *If you have any technical issues please contact +9475 814 1434.
+        *If you have any technical issues, please contact us via whatsapp +9475
+        814 1434.
       </p>
     </form>
   );

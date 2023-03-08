@@ -27,8 +27,9 @@ const Welcome = () => {
       >
         <img src={ArrowRight} alt='Arrow Right Icon' />
       </Button>
-      <p className='text-poppins mt-4 text-sm text-center'>
-        *If you have any technical issues please contact +9475 814 1434.
+      <p className='text-poppins mt-4 text-center text-sm'>
+        *If you have any technical issues, please contact us via whatsapp +9475
+        814 1434.
       </p>
     </div>
   );

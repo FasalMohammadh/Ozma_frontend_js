@@ -52,11 +52,13 @@ function MembershipCard() {
                 </div>
               </div>
               <div className='aspect-square w-16 overflow-hidden rounded-xl bg-white md:w-32'>
-                <img
-                  src={store.imageUrl}
-                  alt='Profile'
-                  className='h-full w-full object-cover object-top'
-                />
+                {store.imageUrl && (
+                  <img
+                    src={store.imageUrl}
+                    alt='Profile'
+                    className='h-full w-full object-cover object-top'
+                  />
+                )}
               </div>
             </div>
             <div className='flex gap-1 px-2 py-1 font-poppins text-sm md:gap-2 md:px-4'>
@@ -139,7 +141,7 @@ function MembershipCard() {
         Note:Our Team will contact you soon!.
       </p>
 
-      <p className='text-poppins mt-2 px-2 text-center text-sm te*If you hxt-white'>
+      <p className='text-poppins te*If you hxt-white mt-2 px-2 text-center text-sm'>
         *All the information provided will be kept private and confidential.
       </p>
     </div>

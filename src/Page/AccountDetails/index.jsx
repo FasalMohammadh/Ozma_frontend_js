@@ -48,8 +48,13 @@ function AccountDetails() {
     try {
       setLoading(true);
 
-      const signatureFileUrl = await s3BucketApi.insert(data.signatureFile[0]);
-      const photoUrl = await s3BucketApi.insert(data.photo[0]);
+      const signatureFileUrl =
+        data.signatureFile.length > 0
+          ? await s3BucketApi.insert(data.signatureFile[0])
+          : null;
+
+      const photoUrl =
+        data.photo.length > 0 ? await s3BucketApi.insert(data.photo[0]) : null;
 
       const { signatureFile, photo, indexNo, profession, ...userData } = data;
 
@@ -266,7 +271,8 @@ function AccountDetails() {
         </Button>
 
         <p className='text-poppins mt-4 text-center text-sm text-custom-form-text'>
-          *If you have any technical issues please contact +9475 814 1434.
+          *If you have any technical issues, please contact us via whatsapp
+          +9475 814 1434.
         </p>
       </form>
       <ToastContainer
@@ -346,28 +352,23 @@ function validatePartOfSmf(val, ctx) {
   }
 }
 
-const validateFile = fieldName => (value, ctx) => {
+function validateFile(value, ctx) {
   const image = value.item(0);
 
-  if (image === null) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: `${fieldName} is Required`,
-    });
-    return z.NEVER;
-  }
-
-  const megaByteInBytes = 1024 * 1024;
-  if (image.size > 2 * megaByteInBytes) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: 'Maximum file size is 2Mb',
-    });
-    return z.NEVER;
+  if (image !== null) {
+    const megaByteInBytes = 1024 * 1024;
+    if (image.size > 2 * megaByteInBytes) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Maximum file size is 2Mb',
+      });
+      return z.NEVER;
+    }
+    return value;
   }
 
   return value;
-};
+}
 
 const validationSchema = z.object({
   address: z.string().trim().min(1, 'Address is a required field'),
@@ -399,10 +400,8 @@ const validationSchema = z.object({
       return valueAsNumber;
     }),
   nic: z.string().trim().min(1, 'NIC is a required field'),
-  signatureFile: z
-    .instanceof(FileList)
-    .transform(validateFile('Signature file')),
-  photo: z.instanceof(FileList).transform(validateFile('Photo')),
+  signatureFile: z.instanceof(FileList).transform(validateFile),
+  photo: z.instanceof(FileList).transform(validateFile),
   dob: z
     .string()
     .min(1, 'Date of Birth is a required field')
