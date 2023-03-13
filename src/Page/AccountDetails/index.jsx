@@ -357,10 +357,10 @@ function validateFile(value, ctx) {
 
   if (image !== null) {
     const megaByteInBytes = 1024 * 1024;
-    if (image.size > 2 * megaByteInBytes) {
+    if (image.size > 5 * megaByteInBytes) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: 'Maximum file size is 2Mb',
+        message: 'Maximum file size is 5Mb',
       });
       return z.NEVER;
     }
